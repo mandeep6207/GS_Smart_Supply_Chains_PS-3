@@ -121,6 +121,24 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
+        {data.modelMetadata && (
+          <div className="analytics-feature-strip card">
+            <div className="section-header" style={{ marginBottom: 14 }}>
+              <div>
+                <div className="section-title">Model inputs</div>
+                <div className="section-subtitle">Signals used by the demo prediction model.</div>
+              </div>
+            </div>
+            <div className="analytics-feature-chip-row">
+              {data.modelMetadata.features.map((feature) => (
+                <span key={feature} className="analytics-feature-chip">
+                  {feature}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Key Metrics Row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, marginBottom: 24 }}>
           {[

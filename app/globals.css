@@ -779,6 +779,26 @@ body {
   line-height: 1.5;
 }
 
+.analytics-feature-strip {
+  margin-bottom: 20px;
+}
+
+.analytics-feature-chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.analytics-feature-chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(79,142,247,0.08);
+  border: 1px solid rgba(79,142,247,0.16);
+  color: var(--accent-blue);
+  font-size: 11px;
+  font-weight: 600;
+}
+
 .live-indicator {
   display: flex;
   align-items: center;
