@@ -1,0 +1,153 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { useEffect, useState } from 'react';
+
+interface NavItem {
+  href: string;
+  icon: string;
+  label: string;
+  badge?: number;
+}
+
+const navItems: NavItem[] = [
+  { href: '/', icon: '⬡', label: 'Dashboard' },
+  { href: '/shipments', icon: '📦', label: 'Shipments' },
+  { href: '/alerts', icon: '🔔', label: 'Alerts' },
+  { href: '/analytics', icon: '📊', label: 'Analytics' },
+];
+
+export default function Sidebar() {
+  const pathname = usePathname();
+  const [alertCount, setAlertCount] = useState(0);
+  const [currentTime, setCurrentTime] = useState('');
+
+  useEffect(() => {
+    // Fetch alert count
+    fetch('/api/alerts')
+      .then((r) => r.json())
+      .then((d) => setAlertCount(d.summary?.critical ?? 0))
+      .catch(() => {});
+
+    // Live clock
+    const tick = () => {
+      setCurrentTime(
+        new Date().toLocaleTimeString('en-IN', {
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: false,
+        })
+      );
+    };
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <aside className="sidebar">
+      {/* Logo */}
+      <div className="sidebar-logo">
+        <div className="sidebar-logo-icon">🏗️</div>
+        <div>
+          <div style={{ fontSize: 13, fontWeight: 700, color: 'var(--text-primary)', lineHeight: 1.2 }}>
+            SupplyChain
+          </div>
+          <div style={{ fontSize: 10, color: 'var(--text-secondary)', fontWeight: 500 }}>
+            Control Tower
+          </div>
+        </div>
+      </div>
+
+      {/* Live Status */}
+      <div style={{
+        margin: '10px 12px',
+        padding: '10px 12px',
+        background: 'rgba(16,185,129,0.08)',
+        borderRadius: 8,
+        border: '1px solid rgba(16,185,129,0.15)',
+      }}>
+        <div className="live-indicator" style={{ marginBottom: 4 }}>
+          <span className="live-dot" />
+          <span>LIVE</span>
+        </div>
+        <div style={{ fontSize: 18, fontWeight: 700, fontFamily: 'JetBrains Mono, monospace', color: 'var(--text-primary)', letterSpacing: '0.05em' }}>
+          {currentTime || '00:00:00'}
+        </div>
+        <div style={{ fontSize: 10, color: 'var(--text-muted)', marginTop: 1 }}>
+          {new Date().toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })}
+        </div>
+      </div>
+
+      {/* Navigation */}
+      <nav className="sidebar-nav">
+        <div className="nav-section-label">Navigation</div>
+
+        {navItems.map((item) => {
+          const isActive = item.href === '/'
+            ? pathname === '/'
+            : pathname.startsWith(item.href);
+          const badge = item.href === '/alerts' ? alertCount : undefined;
+
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`nav-item ${isActive ? 'active' : ''}`}
+              id={`nav-${item.label.toLowerCase()}`}
+            >
+              <span className="nav-icon">{item.icon}</span>
+              <span>{item.label}</span>
+              {badge ? (
+                <span className="nav-badge">{badge}</span>
+              ) : null}
+            </Link>
+          );
+        })}
+
+        <div className="nav-section-label" style={{ marginTop: 16 }}>System</div>
+        <div className="nav-item" style={{ cursor: 'default' }}>
+          <span className="nav-icon">🤖</span>
+          <span>AI Engine</span>
+          <span style={{
+            marginLeft: 'auto',
+            fontSize: 10,
+            color: 'var(--risk-low)',
+            fontWeight: 600,
+            background: 'rgba(16,185,129,0.1)',
+            padding: '2px 6px',
+            borderRadius: 4,
+          }}>ACTIVE</span>
+        </div>
+        <div className="nav-item" style={{ cursor: 'default' }}>
+          <span className="nav-icon">🛰️</span>
+          <span>Data Feed</span>
+          <span style={{
+            marginLeft: 'auto',
+            fontSize: 10,
+            color: 'var(--accent-blue)',
+            fontWeight: 600,
+            background: 'rgba(79,142,247,0.1)',
+            padding: '2px 6px',
+            borderRadius: 4,
+          }}>LIVE</span>
+        </div>
+      </nav>
+
+      {/* Footer */}
+      <div style={{
+        padding: '12px 16px',
+        borderTop: '1px solid var(--border-primary)',
+        fontSize: 11,
+        color: 'var(--text-muted)',
+      }}>
+        <div style={{ fontWeight: 600, color: 'var(--text-secondary)', marginBottom: 2 }}>
+          SupplyChain AI v1.2
+        </div>
+        <div>Google Solution Challenge 2026</div>
+      </div>
+    </aside>
+  );
+}

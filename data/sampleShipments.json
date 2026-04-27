@@ -1,0 +1,253 @@
+[
+  {
+    "id": "SHP-001",
+    "origin": "Mumbai",
+    "destination": "Delhi",
+    "originCoords": [19.076, 72.8777],
+    "destinationCoords": [28.6139, 77.209],
+    "routeCoords": [
+      [19.076, 72.8777],
+      [21.1458, 79.0882],
+      [23.2599, 77.4126],
+      [25.4358, 78.5707],
+      [28.6139, 77.209]
+    ],
+    "carrier": "BlueDart Express",
+    "status": "In Transit",
+    "startTime": "2026-04-25T06:00:00Z",
+    "eta": "2026-04-27T18:00:00Z",
+    "distance": 1415,
+    "cargo": "Electronics",
+    "weight": 2400,
+    "historicalDelayRate": 0.15
+  },
+  {
+    "id": "SHP-002",
+    "origin": "Chennai",
+    "destination": "Hyderabad",
+    "originCoords": [13.0827, 80.2707],
+    "destinationCoords": [17.385, 78.4867],
+    "routeCoords": [
+      [13.0827, 80.2707],
+      [14.4673, 79.9942],
+      [15.9129, 79.74],
+      [17.385, 78.4867]
+    ],
+    "carrier": "DTDC Logistics",
+    "status": "In Transit",
+    "startTime": "2026-04-26T04:00:00Z",
+    "eta": "2026-04-26T22:00:00Z",
+    "distance": 625,
+    "cargo": "Pharmaceuticals",
+    "weight": 850,
+    "historicalDelayRate": 0.08
+  },
+  {
+    "id": "SHP-003",
+    "origin": "Kolkata",
+    "destination": "Bangalore",
+    "originCoords": [22.5726, 88.3639],
+    "destinationCoords": [12.9716, 77.5946],
+    "routeCoords": [
+      [22.5726, 88.3639],
+      [20.2961, 85.8245],
+      [17.6868, 83.2185],
+      [14.4426, 79.1688],
+      [12.9716, 77.5946]
+    ],
+    "carrier": "Gati Express",
+    "status": "Delayed",
+    "startTime": "2026-04-24T10:00:00Z",
+    "eta": "2026-04-27T08:00:00Z",
+    "distance": 1872,
+    "cargo": "Textiles",
+    "weight": 5200,
+    "historicalDelayRate": 0.32
+  },
+  {
+    "id": "SHP-004",
+    "origin": "Pune",
+    "destination": "Ahmedabad",
+    "originCoords": [18.5204, 73.8567],
+    "destinationCoords": [23.0225, 72.5714],
+    "routeCoords": [
+      [18.5204, 73.8567],
+      [19.9975, 73.7898],
+      [21.1702, 72.8311],
+      [23.0225, 72.5714]
+    ],
+    "carrier": "Ecom Express",
+    "status": "In Transit",
+    "startTime": "2026-04-26T07:00:00Z",
+    "eta": "2026-04-26T19:00:00Z",
+    "distance": 492,
+    "cargo": "FMCG",
+    "weight": 1800,
+    "historicalDelayRate": 0.10
+  },
+  {
+    "id": "SHP-005",
+    "origin": "Delhi",
+    "destination": "Jaipur",
+    "originCoords": [28.6139, 77.209],
+    "destinationCoords": [26.9124, 75.7873],
+    "routeCoords": [
+      [28.6139, 77.209],
+      [27.9767, 76.6994],
+      [27.2152, 76.0756],
+      [26.9124, 75.7873]
+    ],
+    "carrier": "BlueDart Express",
+    "status": "On Time",
+    "startTime": "2026-04-26T09:00:00Z",
+    "eta": "2026-04-26T15:00:00Z",
+    "distance": 268,
+    "cargo": "Automotive Parts",
+    "weight": 3100,
+    "historicalDelayRate": 0.06
+  },
+  {
+    "id": "SHP-006",
+    "origin": "Bangalore",
+    "destination": "Mumbai",
+    "originCoords": [12.9716, 77.5946],
+    "destinationCoords": [19.076, 72.8777],
+    "routeCoords": [
+      [12.9716, 77.5946],
+      [15.3173, 75.7139],
+      [17.3841, 76.1478],
+      [18.5204, 73.8567],
+      [19.076, 72.8777]
+    ],
+    "carrier": "Delhivery",
+    "status": "High Risk",
+    "startTime": "2026-04-25T14:00:00Z",
+    "eta": "2026-04-27T10:00:00Z",
+    "distance": 984,
+    "cargo": "Perishables",
+    "weight": 2200,
+    "historicalDelayRate": 0.41
+  },
+  {
+    "id": "SHP-007",
+    "origin": "Hyderabad",
+    "destination": "Kolkata",
+    "originCoords": [17.385, 78.4867],
+    "destinationCoords": [22.5726, 88.3639],
+    "routeCoords": [
+      [17.385, 78.4867],
+      [18.1124, 83.9933],
+      [19.8135, 85.8312],
+      [22.5726, 88.3639]
+    ],
+    "carrier": "Gati Express",
+    "status": "In Transit",
+    "startTime": "2026-04-25T22:00:00Z",
+    "eta": "2026-04-27T14:00:00Z",
+    "distance": 1340,
+    "cargo": "Industrial Equipment",
+    "weight": 7500,
+    "historicalDelayRate": 0.18
+  },
+  {
+    "id": "SHP-008",
+    "origin": "Ahmedabad",
+    "destination": "Chennai",
+    "originCoords": [23.0225, 72.5714],
+    "destinationCoords": [13.0827, 80.2707],
+    "routeCoords": [
+      [23.0225, 72.5714],
+      [20.2002, 73.0169],
+      [18.5204, 73.8567],
+      [16.3067, 77.6006],
+      [13.0827, 80.2707]
+    ],
+    "carrier": "DTDC Logistics",
+    "status": "On Time",
+    "startTime": "2026-04-26T05:00:00Z",
+    "eta": "2026-04-28T06:00:00Z",
+    "distance": 1498,
+    "cargo": "Medical Devices",
+    "weight": 920,
+    "historicalDelayRate": 0.09
+  },
+  {
+    "id": "SHP-009",
+    "origin": "Surat",
+    "destination": "Nagpur",
+    "originCoords": [21.1702, 72.8311],
+    "destinationCoords": [21.1458, 79.0882],
+    "routeCoords": [
+      [21.1702, 72.8311],
+      [21.1458, 79.0882]
+    ],
+    "carrier": "Ecom Express",
+    "status": "Delayed",
+    "startTime": "2026-04-25T16:00:00Z",
+    "eta": "2026-04-26T20:00:00Z",
+    "distance": 558,
+    "cargo": "Chemicals",
+    "weight": 4100,
+    "historicalDelayRate": 0.27
+  },
+  {
+    "id": "SHP-010",
+    "origin": "Jaipur",
+    "destination": "Lucknow",
+    "originCoords": [26.9124, 75.7873],
+    "destinationCoords": [26.8467, 80.9462],
+    "routeCoords": [
+      [26.9124, 75.7873],
+      [26.8801, 78.081],
+      [26.8467, 80.9462]
+    ],
+    "carrier": "Delhivery",
+    "status": "In Transit",
+    "startTime": "2026-04-26T11:00:00Z",
+    "eta": "2026-04-27T05:00:00Z",
+    "distance": 499,
+    "cargo": "Consumer Electronics",
+    "weight": 1650,
+    "historicalDelayRate": 0.12
+  },
+  {
+    "id": "SHP-011",
+    "origin": "Lucknow",
+    "destination": "Patna",
+    "originCoords": [26.8467, 80.9462],
+    "destinationCoords": [25.5941, 85.1376],
+    "routeCoords": [
+      [26.8467, 80.9462],
+      [26.2183, 83.0052],
+      [25.5941, 85.1376]
+    ],
+    "carrier": "BlueDart Express",
+    "status": "High Risk",
+    "startTime": "2026-04-25T20:00:00Z",
+    "eta": "2026-04-27T00:00:00Z",
+    "distance": 484,
+    "cargo": "Agricultural Produce",
+    "weight": 6800,
+    "historicalDelayRate": 0.38
+  },
+  {
+    "id": "SHP-012",
+    "origin": "Bhopal",
+    "destination": "Indore",
+    "originCoords": [23.2599, 77.4126],
+    "destinationCoords": [22.7196, 75.8577],
+    "routeCoords": [
+      [23.2599, 77.4126],
+      [22.9734, 76.6186],
+      [22.7196, 75.8577]
+    ],
+    "carrier": "DTDC Logistics",
+    "status": "On Time",
+    "startTime": "2026-04-26T13:00:00Z",
+    "eta": "2026-04-26T17:00:00Z",
+    "distance": 195,
+    "cargo": "Furniture",
+    "weight": 3800,
+    "historicalDelayRate": 0.05
+  }
+]
