@@ -37,6 +37,9 @@ export default function ShipmentsPage() {
     Low: shipments.filter((s) => s.prediction.riskLevel === 'Low').length,
   };
 
+  const delayedCount = shipments.filter((s) => s.status === 'Delayed').length;
+  const onTimeCount = shipments.filter((s) => s.status === 'On Time').length;
+
   return (
     <div>
       <div className="topbar">
@@ -53,6 +56,24 @@ export default function ShipmentsPage() {
       </div>
 
       <div className="page-content">
+
+        <div className="shipments-summary-grid">
+          <div className="shipments-summary-card">
+            <span>Total routes</span>
+            <strong>{loading ? '...' : counts.All}</strong>
+            <p>All active shipments in the demo feed.</p>
+          </div>
+          <div className="shipments-summary-card">
+            <span>On time</span>
+            <strong>{loading ? '...' : onTimeCount}</strong>
+            <p>{loading ? 'Loading status' : 'Routes currently moving as expected.'}</p>
+          </div>
+          <div className="shipments-summary-card">
+            <span>Delayed</span>
+            <strong>{loading ? '...' : delayedCount}</strong>
+            <p>Shipments that need a closer look.</p>
+          </div>
+        </div>
 
         {/* Filter Tabs */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 20 }}>
@@ -134,6 +155,7 @@ export default function ShipmentsPage() {
               <div className="section-title">📦 Shipment List</div>
               <div className="section-subtitle">
                 {filtered.length} shipments · click to view on map
+                {riskFilter !== 'All' && ` · ${riskFilter} risk filter active`}
               </div>
             </div>
           </div>

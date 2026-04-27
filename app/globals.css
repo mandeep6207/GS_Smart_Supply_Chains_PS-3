@@ -452,6 +452,10 @@ body {
   .auth-preview {
     grid-template-columns: 1fr;
   }
+
+  .shipments-summary-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ─── Sidebar ────────────────────────────────────────────────── */
@@ -643,6 +647,43 @@ body {
   letter-spacing: 0.08em;
   color: var(--accent-blue);
   font-weight: 700;
+}
+
+.shipments-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.shipments-summary-card {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.shipments-summary-card span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.shipments-summary-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.shipments-summary-card p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
 }
 
 .live-indicator {
