@@ -346,6 +346,21 @@ body {
   gap: 8px;
 }
 
+.auth-remember-row {
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.auth-remember-row input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--accent-blue);
+}
+
 .auth-form input {
   width: 100%;
   border: 1px solid var(--border-primary);

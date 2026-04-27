@@ -16,12 +16,18 @@ export default function LoginPage() {
   const [email, setEmail] = useState('demo@supplychain.ai');
   const [password, setPassword] = useState('demo-access');
   const [loading, setLoading] = useState(false);
+  const [remember, setRemember] = useState(true);
   const canSubmit = Boolean(email.trim() && password.trim()) && !loading;
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setLoading(true);
-    window.localStorage.setItem('ssc-demo-session', JSON.stringify({ email, signedInAt: new Date().toISOString() }));
+    window.localStorage.setItem('ssc-demo-session', JSON.stringify({
+      email,
+      signedInAt: new Date().toISOString(),
+      remember,
+      expiresAt: remember ? null : new Date(Date.now() + 30 * 60 * 1000).toISOString(),
+    }));
     router.push('/dashboard');
   }
 
@@ -46,6 +52,10 @@ export default function LoginPage() {
             <label>
               <span><Lock size={14} /> Password</span>
               <input value={password} onChange={(event) => setPassword(event.target.value)} type="password" autoComplete="current-password" />
+            </label>
+            <label className="auth-remember-row">
+              <input checked={remember} onChange={(event) => setRemember(event.target.checked)} type="checkbox" />
+              <span>Keep me signed in for this demo session</span>
             </label>
             <button className="btn btn-primary auth-submit" type="submit" disabled={!canSubmit}>
               {loading ? 'Signing in...' : 'Enter demo workspace'}

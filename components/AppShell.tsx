@@ -25,6 +25,21 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
       return;
     }
 
+    try {
+      const parsedSession = JSON.parse(session) as { expiresAt?: string | null };
+      if (parsedSession.expiresAt && new Date(parsedSession.expiresAt).getTime() < Date.now()) {
+        window.localStorage.removeItem('ssc-demo-session');
+        setIsAuthenticated(false);
+        router.replace('/login');
+        return;
+      }
+    } catch {
+      window.localStorage.removeItem('ssc-demo-session');
+      setIsAuthenticated(false);
+      router.replace('/login');
+      return;
+    }
+
     setIsAuthenticated(true);
   }, [isPublicRoute, router, pathname]);
 
