@@ -456,6 +456,10 @@ body {
   .shipments-summary-grid {
     grid-template-columns: 1fr;
   }
+
+  .alerts-summary-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ─── Sidebar ────────────────────────────────────────────────── */
@@ -681,6 +685,54 @@ body {
 
 .shipments-summary-card p {
   margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.alerts-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.alerts-summary-card {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.alerts-summary-card span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.alerts-summary-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.alerts-summary-card p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.alerts-queue-note {
+  margin: 0 0 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(79,142,247,0.06);
+  border: 1px solid rgba(79,142,247,0.12);
   color: var(--text-secondary);
   font-size: 12px;
   line-height: 1.5;

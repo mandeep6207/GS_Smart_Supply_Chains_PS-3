@@ -27,6 +27,15 @@ export default function AlertsPage() {
       ? alerts
       : alerts.filter((a) => a.severity === filter);
 
+  const criticalQueue = alerts.filter((a) => a.severity === 'critical').length;
+  const warningQueue = alerts.filter((a) => a.severity === 'warning').length;
+
+  function handleMarkAllRead() {
+    const nextAlerts = alerts.map((alert) => ({ ...alert, read: true }));
+    setAlerts(nextAlerts);
+    setSummary((current) => ({ ...current, unread: 0 }));
+  }
+
   return (
     <div>
       <div className="topbar">
@@ -59,10 +68,31 @@ export default function AlertsPage() {
           }}>
             ⚠️ {summary.warning} Warning
           </div>
+          <button className="btn btn-ghost" onClick={handleMarkAllRead} style={{ fontSize: 12 }}>
+            Mark all read
+          </button>
         </div>
       </div>
 
       <div className="page-content">
+
+        <div className="alerts-summary-grid">
+          <div className="alerts-summary-card">
+            <span>Total alerts</span>
+            <strong>{loading ? '...' : summary.total}</strong>
+            <p>Current active queue across the fleet.</p>
+          </div>
+          <div className="alerts-summary-card">
+            <span>Critical queue</span>
+            <strong>{loading ? '...' : criticalQueue}</strong>
+            <p>Immediate intervention required.</p>
+          </div>
+          <div className="alerts-summary-card">
+            <span>Unread</span>
+            <strong>{loading ? '...' : summary.unread}</strong>
+            <p>Alerts not yet acknowledged in the demo session.</p>
+          </div>
+        </div>
 
         {/* Summary Row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 24 }}>
@@ -125,6 +155,9 @@ export default function AlertsPage() {
               <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
                 {filtered.length} alerts
               </span>
+            </div>
+            <div className="alerts-queue-note">
+              {warningQueue} warning alerts and {criticalQueue} critical alerts are active right now.
             </div>
             <AlertsPanel alerts={filtered} loading={loading} />
           </div>
