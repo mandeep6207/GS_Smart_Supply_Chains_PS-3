@@ -26,6 +26,24 @@ const metrics = [
   { value: '1 click', label: 'Demo login' },
 ];
 
+const workflow = [
+  {
+    step: '01',
+    title: 'Connect operations data',
+    description: 'Feed live shipments, alerts, and telemetry into a single control surface.',
+  },
+  {
+    step: '02',
+    title: 'Surface risk instantly',
+    description: 'Spot delayed routes, critical alerts, and model-flagged exceptions before they spread.',
+  },
+  {
+    step: '03',
+    title: 'Act from the dashboard',
+    description: 'Open the demo workspace, review a shipment, and push to a safer route in seconds.',
+  },
+];
+
 export default function LandingPage() {
   return (
     <main className="landing-page">
@@ -110,6 +128,39 @@ export default function LandingPage() {
             );
           })}
         </div>
+
+        <section className="landing-section landing-workflow">
+          <div className="section-header landing-section-header">
+            <div>
+              <div className="section-title">How the demo flows</div>
+              <div className="section-subtitle">A compact path from landing page to live operations view.</div>
+            </div>
+          </div>
+          <div className="landing-workflow-grid">
+            {workflow.map((item) => (
+              <article key={item.step} className="card landing-workflow-card">
+                <div className="landing-workflow-step">{item.step}</div>
+                <h3>{item.title}</h3>
+                <p>{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section className="landing-section">
+          <div className="landing-cta-strip card-glass">
+            <div>
+              <div className="section-title">Built for a quick demo</div>
+              <div className="section-subtitle">
+                Open the dashboard, inspect the network, and try the dummy sign-in flow without setup.
+              </div>
+            </div>
+            <Link className="btn btn-primary" href="/login">
+              Start demo session
+              <ArrowRight size={16} />
+            </Link>
+          </div>
+        </section>
       </section>
     </main>
   );
