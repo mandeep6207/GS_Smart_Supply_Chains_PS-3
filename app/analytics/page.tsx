@@ -70,6 +70,10 @@ export default function AnalyticsPage() {
   });
   const [loading, setLoading] = useState(true);
 
+  const topCargo = data.cargoRisk[0];
+  const topCarrier = [...data.carrierPerformance]
+    .sort((a, b) => (b.onTime / b.deliveries) - (a.onTime / a.deliveries))[0];
+
   useEffect(() => {
     fetch('/api/analytics')
       .then((r) => r.json())
@@ -98,6 +102,24 @@ export default function AnalyticsPage() {
       </div>
 
       <div className="page-content">
+
+        <div className="analytics-insight-grid">
+          <div className="analytics-insight-card">
+            <span>Top risk cargo</span>
+            <strong>{loading ? '...' : topCargo ? topCargo.cargo : '—'}</strong>
+            <p>{loading ? 'Loading patterns' : topCargo ? `Avg risk ${topCargo.avgRisk}% across ${topCargo.shipments} shipments` : 'No cargo trend yet.'}</p>
+          </div>
+          <div className="analytics-insight-card">
+            <span>Best carrier</span>
+            <strong>{loading ? '...' : topCarrier ? topCarrier.carrier : '—'}</strong>
+            <p>{loading ? 'Loading carrier data' : topCarrier ? `${Math.round((topCarrier.onTime / topCarrier.deliveries) * 100)}% on-time performance` : 'No carrier trend yet.'}</p>
+          </div>
+          <div className="analytics-insight-card">
+            <span>Model status</span>
+            <strong>{loading ? '...' : data.modelMetadata ? `${data.modelMetadata.accuracy}%` : '—'}</strong>
+            <p>{loading ? 'Loading model metadata' : data.modelMetadata ? `Updated ${new Date(data.modelMetadata.lastUpdated).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}` : 'No model metadata yet.'}</p>
+          </div>
+        </div>
 
         {/* Key Metrics Row */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 16, marginBottom: 24 }}>

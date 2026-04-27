@@ -460,6 +460,10 @@ body {
   .alerts-summary-grid {
     grid-template-columns: 1fr;
   }
+
+  .analytics-insight-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ─── Sidebar ────────────────────────────────────────────────── */
@@ -733,6 +737,43 @@ body {
   border-radius: 12px;
   background: rgba(79,142,247,0.06);
   border: 1px solid rgba(79,142,247,0.12);
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.analytics-insight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.analytics-insight-card {
+  padding: 18px;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.analytics-insight-card span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.analytics-insight-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 24px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.analytics-insight-card p {
+  margin-top: 8px;
   color: var(--text-secondary);
   font-size: 12px;
   line-height: 1.5;
