@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
@@ -20,8 +21,10 @@ const navItems: NavItem[] = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [alertCount, setAlertCount] = useState(0);
   const [currentTime, setCurrentTime] = useState('');
+  const [demoUser, setDemoUser] = useState('Demo operator');
 
   useEffect(() => {
     // Fetch alert count
@@ -29,6 +32,16 @@ export default function Sidebar() {
       .then((r) => r.json())
       .then((d) => setAlertCount(d.summary?.critical ?? 0))
       .catch(() => {});
+
+    const rawSession = window.localStorage.getItem('ssc-demo-session');
+    if (rawSession) {
+      try {
+        const session = JSON.parse(rawSession) as { email?: string };
+        setDemoUser(session.email ?? 'Demo operator');
+      } catch {
+        setDemoUser('Demo operator');
+      }
+    }
 
     // Live clock
     const tick = () => {
@@ -45,6 +58,11 @@ export default function Sidebar() {
     const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  function handleSignOut() {
+    window.localStorage.removeItem('ssc-demo-session');
+    router.replace('/login');
+  }
 
   return (
     <aside className="sidebar">
@@ -145,6 +163,17 @@ export default function Sidebar() {
           SupplyChain AI v1.2
         </div>
         <div>Google Solution Challenge 2026</div>
+        <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--border-primary)' }}>
+          <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
+            Signed in as
+          </div>
+          <div style={{ fontSize: 12, color: 'var(--text-primary)', fontWeight: 600, marginBottom: 8, wordBreak: 'break-word' }}>
+            {demoUser}
+          </div>
+          <button className="btn btn-ghost" onClick={handleSignOut} style={{ width: '100%', fontSize: 11 }}>
+            Sign out
+          </button>
+        </div>
       </div>
     </aside>
   );
