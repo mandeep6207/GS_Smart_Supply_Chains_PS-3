@@ -154,6 +154,21 @@ export default function LandingPage() {
         </section>
 
         <section className="landing-section">
+          <div className="landing-trust-strip card-glass">
+            {[
+              { title: 'Demo-ready', copy: 'Launch the workspace without any external setup.' },
+              { title: 'Protected routes', copy: 'The dashboard and monitoring views stay behind the login flow.' },
+              { title: 'Live signals', copy: 'Alerts, shipments, and analytics update from the same operational feed.' },
+            ].map((item) => (
+              <div key={item.title} className="landing-trust-item">
+                <div className="landing-trust-title">{item.title}</div>
+                <p>{item.copy}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="landing-section">
           <div className="landing-cta-strip card-glass">
             <div>
               <div className="section-title">Built for a quick demo</div>

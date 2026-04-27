@@ -260,6 +260,29 @@ body {
   color: var(--accent-blue);
 }
 
+.landing-trust-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.landing-trust-item {
+  padding: 6px 2px;
+}
+
+.landing-trust-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.landing-trust-item p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .landing-workflow-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -462,6 +485,10 @@ body {
   }
 
   .analytics-insight-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .landing-trust-strip {
     grid-template-columns: 1fr;
   }
 }
