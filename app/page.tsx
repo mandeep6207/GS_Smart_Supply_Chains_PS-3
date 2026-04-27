@@ -1,4 +1,119 @@
-'use client';
+import Link from 'next/link';
+import { ArrowRight, BarChart3, ShieldCheck, Sparkles, Truck } from 'lucide-react';
+
+const featureCards = [
+  {
+    icon: ShieldCheck,
+    title: 'Risk-aware operations',
+    description: 'Monitor shipment health, alert severity, and predicted delays in one view.',
+  },
+  {
+    icon: Truck,
+    title: 'Live route control',
+    description: 'Track active routes, inspect exceptions, and act on alternate suggestions faster.',
+  },
+  {
+    icon: BarChart3,
+    title: 'Model-backed insights',
+    description: 'Review performance trends, carrier scores, and model accuracy with a single click.',
+  },
+];
+
+const metrics = [
+  { value: '99.4%', label: 'Route visibility' },
+  { value: '24/7', label: 'Live monitoring' },
+  { value: '3 layers', label: 'Risk classification' },
+  { value: '1 click', label: 'Demo login' },
+];
+
+export default function LandingPage() {
+  return (
+    <main className="landing-page">
+      <section className="landing-hero">
+        <div className="landing-hero-copy">
+          <span className="landing-pill">
+            <Sparkles size={14} />
+            Smart Supply Chain Control Tower
+          </span>
+          <h1>
+            Predict disruptions before they slow the network.
+          </h1>
+          <p>
+            A modern logistics workspace for predictive routing, automated alerts, and real-time shipment visibility.
+          </p>
+          <div className="landing-actions">
+            <Link className="btn btn-primary" href="/login">
+              Launch demo
+              <ArrowRight size={16} />
+            </Link>
+            <Link className="btn btn-ghost" href="/dashboard">
+              Open dashboard
+            </Link>
+          </div>
+          <div className="landing-metrics">
+            {metrics.map((metric) => (
+              <div key={metric.label} className="landing-metric-card">
+                <div>{metric.value}</div>
+                <span>{metric.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="landing-panel card-glass">
+          <div className="landing-panel-header">
+            <div>
+              <div className="section-title">Operations preview</div>
+              <div className="section-subtitle">A public front door for the control tower</div>
+            </div>
+            <span className="live-indicator"><span className="live-dot" /> LIVE</span>
+          </div>
+          <div className="landing-preview-grid">
+            <div>
+              <span>Shipment health</span>
+              <strong>92% on-time</strong>
+            </div>
+            <div>
+              <span>High-risk routes</span>
+              <strong>4 active</strong>
+            </div>
+            <div>
+              <span>Critical alerts</span>
+              <strong>2 unresolved</strong>
+            </div>
+            <div>
+              <span>Model accuracy</span>
+              <strong>95.2%</strong>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="landing-section">
+        <div className="section-header landing-section-header">
+          <div>
+            <div className="section-title">Why teams use it</div>
+            <div className="section-subtitle">Built to help operations teams move from monitoring to action.</div>
+          </div>
+        </div>
+        <div className="landing-feature-grid">
+          {featureCards.map((card) => {
+            const Icon = card.icon;
+            return (
+              <article key={card.title} className="card landing-feature-card">
+                <div className="landing-feature-icon">
+                  <Icon size={18} />
+                </div>
+                <h2>{card.title}</h2>
+                <p>{card.description}</p>
+              </article>
+            );
+          })}
+        </div>
+      </section>
+    </main>
+  );
+}'use client';
 
 import { useEffect, useState, useCallback } from 'react';
 import dynamic from 'next/dynamic';

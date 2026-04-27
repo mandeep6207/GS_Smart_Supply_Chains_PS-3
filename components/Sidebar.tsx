@@ -12,7 +12,7 @@ interface NavItem {
 }
 
 const navItems: NavItem[] = [
-  { href: '/', icon: '⬡', label: 'Dashboard' },
+  { href: '/dashboard', icon: '⬡', label: 'Dashboard' },
   { href: '/shipments', icon: '📦', label: 'Shipments' },
   { href: '/alerts', icon: '🔔', label: 'Alerts' },
   { href: '/analytics', icon: '📊', label: 'Analytics' },
@@ -86,9 +86,7 @@ export default function Sidebar() {
         <div className="nav-section-label">Navigation</div>
 
         {navItems.map((item) => {
-          const isActive = item.href === '/'
-            ? pathname === '/'
-            : pathname.startsWith(item.href);
+          const isActive = pathname === item.href || pathname.startsWith(`${item.href}/`);
           const badge = item.href === '/alerts' ? alertCount : undefined;
 
           return (
