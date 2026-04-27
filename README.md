@@ -1,4 +1,20 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a [Next.js](https://nextjs.org) project for a Smart Supply Chain control tower demo.
+
+## Demo Routes
+
+- `/` - public landing page with product overview and demo entry points.
+- `/login` - dummy login that stores a lightweight local session and opens the dashboard.
+- `/dashboard` - protected operations view with KPIs, route monitoring, and alerts.
+- `/shipments` - shipment monitor with shareable risk filters.
+- `/alerts` - triage center with mark-all-read and unread-only controls.
+- `/analytics` - model and carrier insights with chart summaries.
+
+## Demo Behavior
+
+- The sidebar only appears on protected routes.
+- The demo session is stored locally in the browser.
+- Pushing the sign-out button clears the session and returns to `/login`.
+- A `/api/health` endpoint powers the sidebar system status indicator.
 
 ## Getting Started
 
