@@ -1,9 +1,15 @@
 'use client';
 
+import type { Metadata } from 'next';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ArrowRight, CheckCircle2, Lock, Mail, ShieldCheck } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Demo Login | Smart Supply Chain',
+  description: 'Sign in to the demo control tower and open the protected dashboard workspace.',
+};
 
 export default function LoginPage() {
   const router = useRouter();

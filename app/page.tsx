@@ -1,5 +1,11 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ArrowRight, BarChart3, ShieldCheck, Sparkles, Truck } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Smart Supply Chain | Predictive Logistics Demo',
+  description: 'Landing page for the Smart Supply Chain control tower demo with predictive routing and live alerts.',
+};
 
 const featureCards = [
   {
