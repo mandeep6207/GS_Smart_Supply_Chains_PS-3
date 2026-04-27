@@ -26,6 +26,11 @@ export default function Sidebar() {
   const [currentTime, setCurrentTime] = useState('');
   const [demoUser, setDemoUser] = useState('Demo operator');
   const [healthStatus, setHealthStatus] = useState('healthy');
+  const [serviceStatus, setServiceStatus] = useState({
+    shipments: 'online',
+    alerts: 'online',
+    analytics: 'online',
+  });
 
   useEffect(() => {
     // Fetch alert count
@@ -36,7 +41,10 @@ export default function Sidebar() {
 
     fetch('/api/health')
       .then((r) => r.json())
-      .then((d) => setHealthStatus(d.status ?? 'healthy'))
+      .then((d) => {
+        setHealthStatus(d.status ?? 'healthy');
+        setServiceStatus(d.services ?? serviceStatus);
+      })
       .catch(() => setHealthStatus('unknown'));
 
     const rawSession = window.localStorage.getItem('ssc-demo-session');
@@ -174,6 +182,21 @@ export default function Sidebar() {
           <span style={{ fontSize: 11, color: 'var(--text-secondary)', textTransform: 'capitalize' }}>
             System {healthStatus}
           </span>
+        </div>
+        <div style={{ marginTop: 8, display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+          {Object.entries(serviceStatus).map(([service, status]) => (
+            <span key={service} style={{
+              fontSize: 10,
+              textTransform: 'capitalize',
+              padding: '2px 6px',
+              borderRadius: 999,
+              background: 'rgba(79,142,247,0.08)',
+              border: '1px solid rgba(79,142,247,0.12)',
+              color: 'var(--text-secondary)',
+            }}>
+              {service}: {status}
+            </span>
+          ))}
         </div>
         <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--border-primary)' }}>
           <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
