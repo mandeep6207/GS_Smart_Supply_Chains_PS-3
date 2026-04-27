@@ -569,6 +569,48 @@ body {
   margin-top: 1px;
 }
 
+.dashboard-hero-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding: 18px 24px 0;
+}
+
+.dashboard-hero-card {
+  padding: 18px;
+  border-radius: 16px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.dashboard-hero-card span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.dashboard-hero-card strong {
+  display: block;
+  margin-top: 10px;
+  font-size: 32px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.dashboard-hero-card p {
+  margin-top: 8px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.dashboard-hero-card-cta {
+  border-color: rgba(79,142,247,0.16);
+  background: linear-gradient(180deg, rgba(79,142,247,0.1), rgba(255,255,255,0.02));
+}
+
 .live-indicator {
   display: flex;
   align-items: center;
@@ -1054,7 +1096,8 @@ body {
   .sidebar { transform: translateX(-100%); }
   .main-content { margin-left: 0; }
   .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-  .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  .auth-shell,
+  .dashboard-hero-strip {
   .page-content { padding: 16px; }
 }
 

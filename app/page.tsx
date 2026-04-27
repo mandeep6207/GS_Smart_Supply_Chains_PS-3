@@ -167,6 +167,7 @@ export default function LandingPage() {
 }'use client';
 
 import { useEffect, useState, useCallback } from 'react';
+import Link from 'next/link';
 import dynamic from 'next/dynamic';
 import type { EnrichedShipment, Alert, DashboardKPIs } from '@/lib/types';
 import { calculateKPIs } from '@/lib/riskEngine';
@@ -220,6 +221,11 @@ export default function DashboardPage() {
     }
   }, []);
 
+  const criticalAlerts = data.alerts.filter((alert) => alert.severity === 'critical').length;
+  const highRiskShipments = data.shipments.filter((shipment) => shipment.prediction.riskLevel === 'High').length;
+  const onTimeRate = data.kpis?.onTimePercentage ?? 0;
+  const averageRisk = data.kpis?.averageDelayProbability ?? 0;
+
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
     fetchData();
@@ -256,6 +262,32 @@ export default function DashboardPage() {
             <span className="live-dot" />
             <span>LIVE</span>
           </div>
+        </div>
+      </div>
+
+      <div className="dashboard-hero-strip">
+        <div className="dashboard-hero-card">
+          <span>Active shipments</span>
+          <strong>{loading ? '...' : data.shipments.length}</strong>
+          <p>Tracked routes in the demo network.</p>
+        </div>
+        <div className="dashboard-hero-card">
+          <span>Critical alerts</span>
+          <strong>{loading ? '...' : criticalAlerts}</strong>
+          <p>Items needing immediate operational review.</p>
+        </div>
+        <div className="dashboard-hero-card">
+          <span>On-time rate</span>
+          <strong>{loading ? '...' : `${onTimeRate}%`}</strong>
+          <p>Current fleet reliability across all shipments.</p>
+        </div>
+        <div className="dashboard-hero-card dashboard-hero-card-cta">
+          <span>Average risk</span>
+          <strong>{loading ? '...' : `${averageRisk}%`}</strong>
+          <p>{highRiskShipments} high-risk shipments are being watched.</p>
+          <Link href="/analytics" className="btn btn-ghost" style={{ marginTop: 10, width: 'fit-content', fontSize: 11 }}>
+            Open analytics
+          </Link>
         </div>
       </div>
 
