@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import dynamic from 'next/dynamic';
 import type { EnrichedShipment } from '@/lib/types';
 import ShipmentTable from '@/components/ShipmentTable';
@@ -10,6 +11,8 @@ const MapView = dynamic(() => import('@/components/MapView'), { ssr: false });
 type RiskFilter = 'All' | 'High' | 'Medium' | 'Low';
 
 export default function ShipmentsPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [shipments, setShipments] = useState<EnrichedShipment[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<EnrichedShipment | null>(null);
@@ -24,6 +27,13 @@ export default function ShipmentsPage() {
       })
       .catch(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    const risk = searchParams.get('risk');
+    if (risk && ['All', 'High', 'Medium', 'Low'].includes(risk)) {
+      setRiskFilter(risk as RiskFilter);
+    }
+  }, [searchParams]);
 
   const filtered =
     riskFilter === 'All'
@@ -89,7 +99,16 @@ export default function ShipmentsPage() {
               <button
                 key={filter}
                 id={`filter-${filter.toLowerCase()}`}
-                onClick={() => setRiskFilter(filter)}
+                onClick={() => {
+                  setRiskFilter(filter);
+                  const params = new URLSearchParams(searchParams.toString());
+                  if (filter === 'All') {
+                    params.delete('risk');
+                  } else {
+                    params.set('risk', filter);
+                  }
+                  router.replace(params.toString() ? `/shipments?${params.toString()}` : '/shipments', { scroll: false });
+                }}
                 className="btn"
                 style={{
                   background: isActive ? `${colors[filter]}20` : 'var(--bg-card)',
