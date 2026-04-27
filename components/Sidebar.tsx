@@ -25,6 +25,7 @@ export default function Sidebar() {
   const [alertCount, setAlertCount] = useState(0);
   const [currentTime, setCurrentTime] = useState('');
   const [demoUser, setDemoUser] = useState('Demo operator');
+  const [healthStatus, setHealthStatus] = useState('healthy');
 
   useEffect(() => {
     // Fetch alert count
@@ -32,6 +33,11 @@ export default function Sidebar() {
       .then((r) => r.json())
       .then((d) => setAlertCount(d.summary?.critical ?? 0))
       .catch(() => {});
+
+    fetch('/api/health')
+      .then((r) => r.json())
+      .then((d) => setHealthStatus(d.status ?? 'healthy'))
+      .catch(() => setHealthStatus('unknown'));
 
     const rawSession = window.localStorage.getItem('ssc-demo-session');
     if (rawSession) {
@@ -163,6 +169,12 @@ export default function Sidebar() {
           SupplyChain AI v1.2
         </div>
         <div>Google Solution Challenge 2026</div>
+        <div style={{ marginTop: 10, display: 'flex', alignItems: 'center', gap: 8 }}>
+          <span className="live-dot" />
+          <span style={{ fontSize: 11, color: 'var(--text-secondary)', textTransform: 'capitalize' }}>
+            System {healthStatus}
+          </span>
+        </div>
         <div style={{ marginTop: 10, paddingTop: 10, borderTop: '1px solid var(--border-primary)' }}>
           <div style={{ fontSize: 10, textTransform: 'uppercase', letterSpacing: '0.08em', marginBottom: 6 }}>
             Signed in as
