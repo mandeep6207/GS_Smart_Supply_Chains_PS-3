@@ -225,6 +225,23 @@ export default function DashboardPage() {
   const highRiskShipments = data.shipments.filter((shipment) => shipment.prediction.riskLevel === 'High').length;
   const onTimeRate = data.kpis?.onTimePercentage ?? 0;
   const averageRisk = data.kpis?.averageDelayProbability ?? 0;
+  const quickActions = [
+    {
+      href: '/shipments',
+      title: 'Review shipments',
+      description: 'Filter by risk and inspect route detail on the map.',
+    },
+    {
+      href: '/alerts',
+      title: 'Triage alerts',
+      description: 'Read the critical queue and check what needs attention first.',
+    },
+    {
+      href: '/analytics',
+      title: 'Open analytics',
+      description: 'Inspect model performance and trend history for the fleet.',
+    },
+  ];
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps, react-hooks/set-state-in-effect
@@ -289,6 +306,16 @@ export default function DashboardPage() {
             Open analytics
           </Link>
         </div>
+      </div>
+
+      <div className="dashboard-actions-grid">
+        {quickActions.map((action) => (
+          <Link key={action.href} href={action.href} className="dashboard-action-card card">
+            <div className="dashboard-action-title">{action.title}</div>
+            <div className="dashboard-action-description">{action.description}</div>
+            <span className="dashboard-action-link">Open section</span>
+          </Link>
+        ))}
       </div>
 
       <div className="page-content">
