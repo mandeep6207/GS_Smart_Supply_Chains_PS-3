@@ -9,6 +9,7 @@ export default function AlertsPage() {
   const [alerts, setAlerts] = useState<Alert[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<'all' | 'critical' | 'warning'>('all');
+  const [showUnreadOnly, setShowUnreadOnly] = useState(false);
   const [summary, setSummary] = useState({ total: 0, critical: 0, warning: 0, unread: 0 });
 
   useEffect(() => {
@@ -26,6 +27,8 @@ export default function AlertsPage() {
     filter === 'all'
       ? alerts
       : alerts.filter((a) => a.severity === filter);
+
+  const queue = showUnreadOnly ? filtered.filter((a) => !a.read) : filtered;
 
   const criticalQueue = alerts.filter((a) => a.severity === 'critical').length;
   const warningQueue = alerts.filter((a) => a.severity === 'warning').length;
@@ -70,6 +73,13 @@ export default function AlertsPage() {
           </div>
           <button className="btn btn-ghost" onClick={handleMarkAllRead} style={{ fontSize: 12 }}>
             Mark all read
+          </button>
+          <button
+            className="btn btn-ghost"
+            onClick={() => setShowUnreadOnly((current) => !current)}
+            style={{ fontSize: 12 }}
+          >
+            {showUnreadOnly ? 'Show all' : 'Unread only'}
           </button>
         </div>
       </div>
@@ -153,13 +163,13 @@ export default function AlertsPage() {
                 {filter === 'all' ? '🔔 All Alerts' : filter === 'critical' ? '🚨 Critical Alerts' : '⚠️ Warnings'}
               </div>
               <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>
-                {filtered.length} alerts
+                {queue.length} alerts
               </span>
             </div>
             <div className="alerts-queue-note">
               {warningQueue} warning alerts and {criticalQueue} critical alerts are active right now.
             </div>
-            <AlertsPanel alerts={filtered} loading={loading} />
+            <AlertsPanel alerts={queue} loading={loading} />
           </div>
 
           {/* Alert Info Panel */}
